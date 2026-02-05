@@ -1,4 +1,4 @@
-Country,Total Users,Payer Conversion Rate,Total Revenue,ARPU,Avg Predicted LTV,D7 Retention Rate,Country Name
+country,total_users,payer_conversion_rate,total_revenue,arpu,avg_predicted_ltv,d7_retention_rate,country_name
 AU,445,0.0539,1952.83,4.3884,1.8993,0.0382,Australia
 BR,685,0.0248,300.19,0.4382,2.5111,0.0453,Brazil
 CA,482,0.0456,1057.03,2.193,1.9337,0.027,Canada

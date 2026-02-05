@@ -30,58 +30,58 @@ def load_data():
 def create_user_level_export(df):
     """
     Create user-level dataset for detailed analysis.
-    Optimized for Tableau/Looker with clean column names.
+    Optimized for Tableau/Looker with snake_case column names.
     """
     export = pd.DataFrame({
         # Identifiers
-        'User ID': df['user_id'],
-        'Install Date': df['install_date'],
-        'Install Month': df['install_date'].dt.to_period('M').astype(str),
-        'Install Week': df['install_date'].dt.to_period('W').astype(str),
-        'Days Since Install': df['days_since_install'],
+        'user_id': df['user_id'],
+        'install_date': df['install_date'],
+        'install_month': df['install_date'].dt.to_period('M').astype(str),
+        'install_week': df['install_date'].dt.to_period('W').astype(str),
+        'days_since_install': df['days_since_install'],
 
         # Dimensions (for filtering/grouping)
-        'Acquisition Source': df['acquisition_source'].str.replace('_', ' ').str.title(),
-        'Country': df['country'],
-        'Platform': df['platform'],
-        'Age Group': df['age_group'],
+        'acquisition_source': df['acquisition_source'],
+        'country': df['country'],
+        'platform': df['platform'],
+        'age_group': df['age_group'],
 
         # Retention Flags
-        'Day 1 Retained': df['d1_retention'].map({1: 'Yes', 0: 'No'}),
-        'Day 7 Retained': df['d7_retention'].map({1: 'Yes', 0: 'No'}),
-        'Day 30 Retained': df['d30_retention'].map({1: 'Yes', 0: 'No'}),
+        'day_1_retained': df['d1_retention'].map({1: 'Yes', 0: 'No'}),
+        'day_7_retained': df['d7_retention'].map({1: 'Yes', 0: 'No'}),
+        'day_30_retained': df['d30_retention'].map({1: 'Yes', 0: 'No'}),
 
         # Engagement Metrics
-        'Total Sessions': df['total_sessions'],
-        'Avg Session Duration (min)': df['avg_session_duration_min'].round(1),
-        'Total Playtime (hours)': df['total_playtime_hours'].round(1),
-        'Levels Completed': df['levels_completed'],
-        'Tutorial Completed': df['tutorial_completed'].map({1: 'Yes', 0: 'No'}),
-        'Ads Watched': df['ads_watched'],
-        'Friends Invited': df['friends_invited'],
-        'Guild Joined': df['guild_joined'].map({1: 'Yes', 0: 'No'}),
+        'total_sessions': df['total_sessions'],
+        'avg_session_duration_min': df['avg_session_duration_min'].round(1),
+        'total_playtime_hours': df['total_playtime_hours'].round(1),
+        'levels_completed': df['levels_completed'],
+        'tutorial_completed': df['tutorial_completed'].map({1: 'Yes', 0: 'No'}),
+        'ads_watched': df['ads_watched'],
+        'friends_invited': df['friends_invited'],
+        'guild_joined': df['guild_joined'].map({1: 'Yes', 0: 'No'}),
 
         # Monetization
-        'Is Payer': df['is_payer'].map({1: 'Yes', 0: 'No'}),
-        'Number of Purchases': df['num_purchases'],
-        'First Purchase Day': df['first_purchase_day'],
-        'Total Revenue': df['total_revenue'].round(2),
+        'is_payer': df['is_payer'].map({1: 'Yes', 0: 'No'}),
+        'number_of_purchases': df['num_purchases'],
+        'first_purchase_day': df['first_purchase_day'],
+        'total_revenue': df['total_revenue'].round(2),
 
         # LTV Metrics
-        'LTV Day 7': df['ltv_day7'].round(2),
-        'LTV Day 30': df['ltv_day30'].round(2),
-        'LTV Day 90': df['ltv_day90'].round(2),
-        'LTV Day 180': df['ltv_day180'].round(2),
-        'LTV Day 365': df['ltv_day365'].round(2),
+        'ltv_day_7': df['ltv_day7'].round(2),
+        'ltv_day_30': df['ltv_day30'].round(2),
+        'ltv_day_90': df['ltv_day90'].round(2),
+        'ltv_day_180': df['ltv_day180'].round(2),
+        'ltv_day_365': df['ltv_day365'].round(2),
 
         # Predictions
-        'Predicted LTV': df['predicted_ltv'].round(2),
-        'User Segment': df['segment'],
+        'predicted_ltv': df['predicted_ltv'].round(2),
+        'user_segment': df['segment'],
 
         # Derived Metrics (useful for Tableau calculations)
-        'Sessions Per Day': (df['total_sessions'] / np.maximum(df['days_since_install'], 1)).round(2),
-        'Revenue Per Session': (df['total_revenue'] / np.maximum(df['total_sessions'], 1)).round(2),
-        'Engagement Score': (
+        'sessions_per_day': (df['total_sessions'] / np.maximum(df['days_since_install'], 1)).round(2),
+        'revenue_per_session': (df['total_revenue'] / np.maximum(df['total_sessions'], 1)).round(2),
+        'engagement_score': (
             df['d1_retention'] * 10 +
             df['d7_retention'] * 30 +
             df['d30_retention'] * 60 +
@@ -110,20 +110,20 @@ def create_cohort_summary(df):
     }).round(4)
 
     cohort_summary.columns = [
-        'Total Users',
-        'D1 Retention Rate',
-        'D7 Retention Rate',
-        'D30 Retention Rate',
-        'Payer Conversion Rate',
-        'Total Revenue',
-        'ARPU',
-        'Avg Predicted LTV',
-        'Avg Sessions',
-        'Avg Playtime Hours'
+        'total_users',
+        'd1_retention_rate',
+        'd7_retention_rate',
+        'd30_retention_rate',
+        'payer_conversion_rate',
+        'total_revenue',
+        'arpu',
+        'avg_predicted_ltv',
+        'avg_sessions',
+        'avg_playtime_hours'
     ]
 
     cohort_summary = cohort_summary.reset_index()
-    cohort_summary.rename(columns={'cohort': 'Cohort Month'}, inplace=True)
+    cohort_summary.rename(columns={'cohort': 'cohort_month'}, inplace=True)
 
     return cohort_summary
 
@@ -141,23 +141,21 @@ def create_acquisition_summary(df):
     }).round(4)
 
     summary.columns = [
-        'Total Users',
-        'D1 Retention Rate',
-        'D7 Retention Rate',
-        'Payer Conversion Rate',
-        'Total Revenue',
-        'ARPU',
-        'Avg Predicted LTV',
-        'Avg Sessions'
+        'total_users',
+        'd1_retention_rate',
+        'd7_retention_rate',
+        'payer_conversion_rate',
+        'total_revenue',
+        'arpu',
+        'avg_predicted_ltv',
+        'avg_sessions'
     ]
 
     summary = summary.reset_index()
-    summary.rename(columns={'acquisition_source': 'Acquisition Source'}, inplace=True)
-    summary['Acquisition Source'] = summary['Acquisition Source'].str.replace('_', ' ').str.title()
 
     # Calculate ROI proxy (assuming $2 CPI)
-    summary['Est. CPI'] = 2.00
-    summary['Est. ROI'] = ((summary['ARPU'] - summary['Est. CPI']) / summary['Est. CPI'] * 100).round(1)
+    summary['est_cpi'] = 2.00
+    summary['est_roi'] = ((summary['arpu'] - summary['est_cpi']) / summary['est_cpi'] * 100).round(1)
 
     return summary
 
@@ -173,16 +171,15 @@ def create_country_summary(df):
     }).round(4)
 
     summary.columns = [
-        'Total Users',
-        'Payer Conversion Rate',
-        'Total Revenue',
-        'ARPU',
-        'Avg Predicted LTV',
-        'D7 Retention Rate'
+        'total_users',
+        'payer_conversion_rate',
+        'total_revenue',
+        'arpu',
+        'avg_predicted_ltv',
+        'd7_retention_rate'
     ]
 
     summary = summary.reset_index()
-    summary.rename(columns={'country': 'Country'}, inplace=True)
 
     # Add country names
     country_names = {
@@ -190,7 +187,7 @@ def create_country_summary(df):
         'DE': 'Germany', 'UK': 'United Kingdom', 'CN': 'China',
         'BR': 'Brazil', 'IN': 'India', 'CA': 'Canada', 'AU': 'Australia'
     }
-    summary['Country Name'] = summary['Country'].map(country_names)
+    summary['country_name'] = summary['country'].map(country_names)
 
     return summary
 
@@ -207,23 +204,23 @@ def create_segment_summary(df):
     }).round(2)
 
     summary.columns = [
-        'User Count',
-        'Total Revenue',
-        'Avg Revenue',
-        'Avg Predicted LTV',
-        'Avg Sessions',
-        'Avg Playtime Hours',
-        'Avg Purchases'
+        'user_count',
+        'total_revenue',
+        'avg_revenue',
+        'avg_predicted_ltv',
+        'avg_sessions',
+        'avg_playtime_hours',
+        'avg_purchases'
     ]
 
     summary = summary.reset_index()
-    summary.rename(columns={'segment': 'User Segment'}, inplace=True)
+    summary.rename(columns={'segment': 'user_segment'}, inplace=True)
 
     # Calculate percentages
-    total_users = summary['User Count'].sum()
-    total_revenue = summary['Total Revenue'].sum()
-    summary['% of Users'] = (summary['User Count'] / total_users * 100).round(1)
-    summary['% of Revenue'] = (summary['Total Revenue'] / total_revenue * 100).round(1)
+    total_users = summary['user_count'].sum()
+    total_rev = summary['total_revenue'].sum()
+    summary['pct_of_users'] = (summary['user_count'] / total_users * 100).round(1)
+    summary['pct_of_revenue'] = (summary['total_revenue'] / total_rev * 100).round(1)
 
     return summary
 
@@ -239,9 +236,9 @@ def create_ltv_curve_data(df):
         segment_data = df[df['segment'] == segment]
         for day, col in zip(days, ltv_cols):
             curves.append({
-                'User Segment': segment,
-                'Day': day,
-                'Avg LTV': segment_data[col].mean().round(2)
+                'user_segment': segment,
+                'day': day,
+                'avg_ltv': segment_data[col].mean().round(2)
             })
 
     return pd.DataFrame(curves)

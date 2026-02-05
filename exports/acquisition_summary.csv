@@ -1,7 +1,7 @@
-Acquisition Source,Total Users,D1 Retention Rate,D7 Retention Rate,Payer Conversion Rate,Total Revenue,ARPU,Avg Predicted LTV,Avg Sessions,Est. CPI,Est. ROI
-Apple Search,974,0.3583,0.0452,0.0524,2588.51,2.6576,2.8189,11.8409,2.0,32.9
-Cross Promo,467,0.3769,0.045,0.0642,2090.04,4.4755,3.0844,11.9829,2.0,123.8
-Facebook Ads,2565,0.3361,0.0386,0.0554,8727.21,3.4024,2.5144,11.5848,2.0,70.1
-Google Ads,1938,0.3509,0.0372,0.0547,4121.33,2.1266,2.4226,12.0619,2.0,6.3
-Influencer,1048,0.3674,0.0429,0.0468,4283.16,4.087,4.4156,12.6412,2.0,104.4
-Organic,3008,0.3577,0.0426,0.0572,8839.35,2.9386,3.4828,12.8338,2.0,46.9
+acquisition_source,total_users,d1_retention_rate,d7_retention_rate,payer_conversion_rate,total_revenue,arpu,avg_predicted_ltv,avg_sessions,est_cpi,est_roi
+apple_search,974,0.3583,0.0452,0.0524,2588.51,2.6576,2.8189,11.8409,2.0,32.9
+cross_promo,467,0.3769,0.045,0.0642,2090.04,4.4755,3.0844,11.9829,2.0,123.8
+facebook_ads,2565,0.3361,0.0386,0.0554,8727.21,3.4024,2.5144,11.5848,2.0,70.1
+google_ads,1938,0.3509,0.0372,0.0547,4121.33,2.1266,2.4226,12.0619,2.0,6.3
+influencer,1048,0.3674,0.0429,0.0468,4283.16,4.087,4.4156,12.6412,2.0,104.4
+organic,3008,0.3577,0.0426,0.0572,8839.35,2.9386,3.4828,12.8338,2.0,46.9

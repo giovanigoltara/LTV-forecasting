@@ -1,4 +1,4 @@
-Cohort Month,Total Users,D1 Retention Rate,D7 Retention Rate,D30 Retention Rate,Payer Conversion Rate,Total Revenue,ARPU,Avg Predicted LTV,Avg Sessions,Avg Playtime Hours
+cohort_month,total_users,d1_retention_rate,d7_retention_rate,d30_retention_rate,payer_conversion_rate,total_revenue,arpu,avg_predicted_ltv,avg_sessions,avg_playtime_hours
 2025-01,859,0.3388,0.0489,0.0012,0.0547,1639.98,1.9092,2.3396,13.1118,3.1131
 2025-02,759,0.3267,0.0343,0.0013,0.0672,2787.22,3.6722,4.274,11.5797,2.8265
 2025-03,824,0.3519,0.0388,0.0012,0.0558,2931.6,3.5578,2.3733,12.0267,2.7822
